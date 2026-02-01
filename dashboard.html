@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dú Cervejaria - Dashboard Administrativo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <h2>Dú Admin</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="javascript:void(0)" id="nav-products" class="active" onclick="switchTab('products')"><i
+                        class="fa-solid fa-box-open"></i> Produtos</a>
+                <a href="javascript:void(0)" id="nav-categories" onclick="switchTab('categories')"><i
+                        class="fa-solid fa-layer-group"></i> Categorias</a>
+                <a href="javascript:void(0)" id="nav-inventory" onclick="switchTab('inventory')"><i
+                        class="fa-solid fa-boxes-stacked"></i> Estoque</a>
+                <a href="javascript:void(0)" id="nav-delivery" onclick="switchTab('delivery')"><i
+                        class="fa-solid fa-truck-fast"></i> Entrega</a>
+                <a href="javascript:void(0)" id="nav-reports" onclick="switchTab('reports')"><i
+                        class="fa-solid fa-chart-line"></i> Relatórios</a>
+                <a href="javascript:void(0)" id="nav-orders" onclick="switchTab('orders')">
+                    <i class="fa-solid fa-receipt"></i> Pedidos</a>
+                <a href="javascript:void(0)" id="nav-settings" onclick="switchTab('settings')"><i
+                        class="fa-solid fa-gear"></i> Configurações</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>Gerenciamento de Produtos</h1>
+                    <p>Controle total do seu estoque 24h</p>
+                </div>
+                <div class="user-info">
+                    <span>Admin</span>
+                    <div class="avatar"><i class="fa-solid fa-user"></i></div>
+                </div>
+            </header>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #e8f5e9; color: #2e7d32;">
+                        <i class="fa-solid fa-dolly"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Produtos</h3>
+                        <span id="stat-total">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #fff3e0; color: #ef6c00;">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Categorias</h3>
+                        <span id="stat-categories">0</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #ffebee; color: #c62828;">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Estoque Baixo</h3>
+                        <span id="stat-low-stock">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Section -->
+            <div id="section-products" class="tab-content">
+                <!-- Enhanced Filters -->
+                <div class="filters-bar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="search-input" placeholder="Buscar produtos..."
+                            onkeyup="filterProducts()">
+                    </div>
+                    <select id="filter-category" onchange="filterProducts()">
+                        <option value="">Todas as Categorias</option>
+                        <!-- Populated via JS -->
+                    </select>
+                    <button class="btn-add" onclick="openProductModal('add')">
+                        <i class="fa-solid fa-plus"></i> Novo Produto
+                    </button>
+                    <button class="btn-add" style="background-color: var(--accent-color);"
+                        onclick="openCategoryModal()">
+                        <i class="fa-solid fa-folder-plus"></i> Nova Categoria
+                    </button>
+                    <button class="btn-add" style="background-color: var(--danger-color);"
+                        onclick="openDeleteCategoryQuickModal()">
+                        <i class="fa-solid fa-folder-minus"></i> Excluir Categoria
+                    </button>
+                </div>
+
+                <!-- Products Table -->
+                <div class="table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Preço (R$)</th>
+                                <th>Preço Original</th>
+                                <th>Estoque</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table-body">
+                            <!-- Rows rendered via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Categories Section -->
+            <div id="section-categories" class="tab-content" style="display: none;">
+                <div class="filters-bar">
+                    <div class="header-title">
+                        <h2>Listagem de Categorias</h2>
+                    </div>
+                    <button class="btn-add" onclick="openCategoryModal()">
+                        <i class="fa-solid fa-plus"></i> Nova Categoria
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Categoria</th>
+                                <th>Qtd. Produtos</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categories-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Inventory Section (Low Stock Only) -->
+            <div id="section-inventory" class="tab-content" style="display: none;">
+                <div class="filters-bar">
+                    <div class="header-title">
+                        <h2>Produtos com Estoque Baixo</h2>
+                        <p>Itens com 10 ou menos unidades</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Estoque</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Delivery Section -->
+            <div id="section-delivery" class="tab-content" style="display: none;">
+                <div class="filters-bar">
+                    <div class="header-title">
+                        <h2>Taxas de Entrega por Bairro</h2>
+                        <p>Gerencie os valores de entrega por zona e bairro</p>
+                    </div>
+                    <div
+                        style="display: flex; gap: 10px; align-items: center; background: #e3f2fd; padding: 10px 15px; border-radius: 8px; border: 1px solid #bbdefb;">
+                        <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.2rem;"></i>
+                        <input type="text" id="config-whatsapp" placeholder="5511999999999"
+                            style="width: 150px; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                        <button class="btn-add" style="padding: 8px 15px;" onclick="saveWhatsAppConfig()">Salvar
+                            Zap</button>
+                    </div>
+                    <button class="btn-add" onclick="openNeighborhoodModal()">
+                        <i class="fa-solid fa-plus"></i> Novo Bairro
+                    </button>
+                </div>
+
+                <div class="table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Zona</th>
+                                <th>Bairro</th>
+                                <th>Taxa (R$)</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="delivery-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Orders Section -->
+            <div id="section-orders" class="tab-content" style="display: none;">
+                <div class="filters-bar">
+                    <div class="header-title">
+                        <h2>Histórico de Pedidos</h2>
+                        <p>Acompanhe as vendas realizadas pelo site</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Cliente / WhatsApp</th>
+                                <th>Itens</th>
+                                <th>Total (c/ Entrega)</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div id="section-reports" class="tab-content" style="display: none;">
+                <div class="filters-bar">
+                    <div class="header-title">
+                        <h2>Relatórios de Demanda</h2>
+                        <p>Produtos mais adicionados ao carrinho</p>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Posição</th>
+                                <th>Imagem</th>
+                                <th>Produto</th>
+                                <th>Demanda</th>
+                                <th>Mais Vendido?</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reports-table-body">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="section-settings" class="tab-content" style="display: none;">
+                <div class="filters-bar">
+                    <div class="header-title">
+                        <h2>Configurações do Painel</h2>
+                        <p>Gerencie seu acesso e deixe sugestões</p>
+                    </div>
+                </div>
+
+                <div class="settings-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <!-- Auth Settings -->
+                    <div class="card"
+                        style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        <h3
+                            style="margin-bottom: 20px; color: var(--primary-color); display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-lock"></i> Segurança de Acesso
+                        </h3>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Novo Usuário</label>
+                            <input type="text" id="new-admin-user" placeholder="Ex: ducervejaria"
+                                style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                        </div>
+                        <div class="form-group" style="margin-bottom: 15px;">
+                            <label style="display: block; margin-bottom: 5px; font-weight: 500;">Nova Senha</label>
+                            <div style="position: relative; width: 100%;">
+                                <input type="password" id="new-admin-pass" placeholder="********"
+                                    style="width: 100%; padding: 10px; padding-right: 40px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;">
+                                <i class="fa-solid fa-eye" id="toggle-new-pass"
+                                    onclick="togglePasswordVisibility('new-admin-pass', 'toggle-new-pass')"
+                                    style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #666;"></i>
+                            </div>
+                        </div>
+                        <button class="btn-add" style="width: 100%;" onclick="updateAdminAuth()">Atualizar
+                            Credenciais</button>
+                    </div>
+
+                    <!-- Developer Suggestions -->
+                    <div class="card"
+                        style="background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        <h3 style="margin-bottom: 20px; color: #ff9800; display: flex; align-items: center; gap: 10px;">
+                            <i class="fa-solid fa-lightbulb"></i> Sugestões para o Desenvolvedor
+                        </h3>
+                        <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">O que você gostaria de ver no
+                            sistema? Novas funções, correções ou melhorias...</p>
+                        <div class="form-group">
+                            <textarea id="dev-suggestions" placeholder="Escreva aqui suas sugestões..."
+                                style="width: 100%; height: 120px; padding: 10px; border: 1px solid #ddd; border-radius: 6px; resize: none; box-sizing: border-box;"></textarea>
+                        </div>
+                        <button class="btn-add"
+                            style="width: 100%; background: #ff9800; border: none; margin-top: 10px;"
+                            onclick="sendSuggestion()">Enviar Sugestão</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Product Modal (Copied/Adapted from index) -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('product-modal')">&times;</span>
+            <h2 id="modal-title">Adicionar Produto</h2>
+            <input type="hidden" id="prod-id">
+            <input type="text" id="prod-name" placeholder="Nome do Produto">
+            <input type="number" id="prod-price" step="0.01" placeholder="Preço (R$)">
+            <input type="number" id="prod-old-price" step="0.01" placeholder="Preço Original (R$)">
+            <input type="number" id="prod-stock" placeholder="Quantidade em Estoque">
+
+            <input type="hidden" id="prod-img">
+            <div class="file-upload-wrapper">
+                <div class="upload-content" id="upload-text">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Arraste ou clique para upload</span>
+                </div>
+                <input type="file" id="prod-img-file" accept="image/*" onchange="previewImage(this)">
+                <img id="img-preview" class="file-upload-preview" src="">
+            </div>
+
+            <select id="prod-category">
+                <option value="">Selecione a Categoria</option>
+            </select>
+
+            <button onclick="saveProduct()" class="btn-save">Salvar Produto</button>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div id="category-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('category-modal')">&times;</span>
+            <h2>Nova Categoria</h2>
+            <input type="text" id="cat-name" placeholder="Nome da Categoria">
+            <button onclick="saveCategory()" class="btn-save">Salvar Categoria</button>
+        </div>
+    </div>
+
+    <!-- Quick Delete Category Modal -->
+    <div id="delete-category-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('delete-category-modal')">&times;</span>
+            <h2>Excluir Categoria</h2>
+            <p style="font-size: 0.9rem; color: #666; margin-bottom: 15px;">Selecione a categoria para remover (apenas
+                vazias):</p>
+            <select id="delete-cat-select" style="margin-bottom: 20px;">
+                <!-- Populated via JS -->
+            </select>
+            <button onclick="quickDeleteCategory()" class="btn-save"
+                style="background-color: var(--danger-color);">Excluir Selecionada</button>
+        </div>
+    </div>
+
+    <!-- Neighborhood Modal -->
+    <div id="neighborhood-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('neighborhood-modal')">&times;</span>
+            <h2 id="neighborhood-modal-title">Novo Bairro</h2>
+            <input type="hidden" id="neighbor-id">
+
+            <label for="neighbor-zone">Zona</label>
+            <select id="neighbor-zone" style="margin-bottom: 15px;">
+                <option value="ZONA NORTE">ZONA NORTE</option>
+                <option value="ZONA SUL">ZONA SUL</option>
+                <option value="ZONA LESTE">ZONA LESTE</option>
+                <option value="ZONA OESTE">ZONA OESTE</option>
+                <option value="CENTRO">CENTRO</option>
+                <option value="OUTRA">OUTRA</option>
+            </select>
+
+            <label for="neighbor-name">Nome do Bairro</label>
+            <input type="text" id="neighbor-name" placeholder="Ex: Copacabana" style="margin-bottom: 15px;">
+
+            <label for="neighbor-fee">Taxa de Entrega (R$)</label>
+            <input type="number" id="neighbor-fee" step="0.01" placeholder="Ex: 10.00" style="margin-bottom: 20px;">
+
+            <button onclick="saveNeighborhood()" class="btn-save">Salvar Bairro</button>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div id="order-details-modal" class="modal">
+        <div class="modal-content"
+            style="width: 500px; max-width: 95%; background: #fff; padding: 0; border-radius: 12px; overflow: hidden;">
+            <div
+                style="background: var(--primary-color); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="margin: 0; color: white; font-size: 1.3rem;">Detalhes do Pedido</h2>
+                <span class="close-modal" onclick="closeModal('order-details-modal')"
+                    style="position: static; color: white; opacity: 0.8;">&times;</span>
+            </div>
+
+            <div id="order-details-content" style="padding: 25px; max-height: 70vh; overflow-y: auto;">
+                <!-- Populated via JS -->
+            </div>
+
+            <div
+                style="padding: 15px 25px; background: #f8f9fa; border-top: 1px solid #eee; display: flex; justify-content: flex-end;">
+                <button onclick="closeModal('order-details-modal')" class="btn-add"
+                    style="background: #6c757d; padding: 8px 20px;">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="products.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>

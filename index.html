@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dú Cervejaria - Delivery de Bebidas</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <span><i class="fa-solid fa-check"></i> Seu lugar favorito e com bebida gelada é só aqui no Dù
+                Cervejaria.</span>
+            <div class="top-links">
+                <a href="#">Minha Conta</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.jpg" alt="Dú Cervejaria Delivery" class="logo-img">
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar produtos..." onkeyup="searchProducts(event)">
+                <button onclick="performSearch()"><i class="fa-solid fa-search"></i></button>
+            </div>
+
+            <div class="header-actions">
+
+                <a href="#" class="action-item" onclick="openLoginModal(); return false;">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Entrar</span>
+                </a>
+                <a href="#" class="action-item cart-btn" onclick="toggleCart()">
+                    <div class="cart-icon">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="all-categories">
+                <i class="fa-solid fa-bars"></i> Todas as Categorias
+                <ul class="dropdown-menu" id="categories-dropdown">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Início</a></li>
+                <li><a href="#">Favoritos</a></li>
+                <li><a href="javascript:void(0)" onclick="scrollToSection('ofertas-dia')" class="highlight">Ofertas do
+                        Dia</a></li>
+                <li><a href="javascript:void(0)" onclick="scrollToSection('ofertas-imperdiveis')"
+                        class="urgent-offer">Ofertas Imperdíveis</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-banners">
+                <div class="main-banner">
+                    <div class="banner-content">
+                        <h2>Ofertas Imperdíveis</h2>
+                        <h3>Cervejas, Destilados e muito mais</h3>
+                        <p>Os melhores preços da cidade e produtos extremamente gelados você só encontra aqui.</p>
+                        <a href="javascript:void(0)" onclick="scrollToSection('ofertas-imperdiveis')"
+                            class="btn-primary">Comprar Agora</a>
+                    </div>
+                </div>
+                <!-- Side Banners could go here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container features-grid">
+            <div class="feature-item">
+                <i class="fa-solid fa-truck-fast"></i>
+                <div>
+                    <h4>Entrega Rápida</h4>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-credit-card"></i>
+                <div>
+                    <h4>Pagamento Seguro</h4>
+                    <p>Cartão, dinheiro ou Pix</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-percent"></i>
+                <div>
+                    <h4>Melhores Preços</h4>
+                    <p>Somente aqui</p>
+                </div>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-headset"></i>
+                <div>
+                    <h4>Suporte</h4>
+                    <p>Em horário de funcionamento</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Banner -->
+    <div class="marquee-container">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="marquee-content">
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+                <span>Dú Cervejaria</span>
+                <i class="fa-solid fa-beer-mug-empty"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ofertas do Dia Section -->
+    <section id="ofertas-dia" class="products-section"
+        style="background-color: #fffde7; border-bottom: 1px solid #fff59d; display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: #fbc02d;">Ofertas do Dia <i class="fa-solid fa-bolt"></i></h2>
+                <span style="color: #666; font-style: italic;">Aproveite as promoções de hoje!</span>
+            </div>
+            <div class="products-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Ofertas Imperdíveis Section -->
+    <section id="ofertas-imperdiveis" class="products-section" style="background-color: #fff5f5; display: none;">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: #d32f2f;">Ofertas Imperdíveis <i class="fa-solid fa-fire"></i></h2>
+                <span style="color: #666; font-style: italic;">Até acabarem os estoques!</span>
+            </div>
+            <div class="products-grid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 id="main-section-title">Mais Vendidos</h2>
+                <a href="javascript:void(0)" class="view-all" id="toggle-view-btn" onclick="toggleMainView()">Ver Todos
+                    <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+            <div class="products-grid" id="products-container">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <i class="fa-brands fa-whatsapp"></i>
+                <div class="text">
+                    <h3>Receba Ofertas no WhatsApp</h3>
+                    <p>Cadastre seu número e não perca nenhuma promoção!</p>
+                </div>
+                <form>
+                    <input type="tel" placeholder="Seu WhatsApp com DDD">
+                    <button type="submit">Receber Ofertas</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Dú Cervejaria</h3>
+                <p>Sua melhor opção em delivery de bebidas. Cerveja gelada e entrega rápida.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Categorias</h3>
+                <ul id="footer-categories">
+                    <!-- JS populated -->
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Institucional</h3>
+                <ul>
+                    <li><a href="#">Sobre Nós</a></li>
+                    <li><a href="#">Política de Privacidade</a></li>
+                    <li><a href="#">Termos de Uso</a></li>
+                    <li><a href="#">Trocas e Devoluções</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Contato</h3>
+                <ul>
+                    <li><i class="fa-solid fa-location-dot"></i> Rua Exemplo, 123 - Rio de Janeiro, RJ</li>
+                    <li><i class="fa-solid fa-phone"></i> (21) 9999-9999</li>
+                    <li><i class="fa-solid fa-envelope"></i> contato@ducervejaria.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="bottom-bar">
+            <div class="container">
+                <p>&copy; 2026 Dú Cervejaria. Todos os direitos reservados.</p>
+                <div class="payment-methods">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-pix"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('login-modal')">&times;</span>
+            <h2>Área Administrativa</h2>
+            <input type="text" id="admin-user" placeholder="Usuário">
+            <input type="password" id="admin-pass" placeholder="Senha">
+            <button onclick="login()">Entrar</button>
+        </div>
+    </div>
+
+    <!-- Product Modal (Add/Edit) -->
+    <div id="product-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('product-modal')">&times;</span>
+            <h2 id="modal-title">Adicionar Produto</h2>
+            <input type="hidden" id="prod-id">
+            <input type="text" id="prod-name" placeholder="Nome do Produto">
+            <input type="number" id="prod-price" step="0.01" placeholder="Preço (R$)">
+            <input type="number" id="prod-old-price" step="0.01" placeholder="Preço Original (R$)">
+
+            <input type="hidden" id="prod-img"> <!-- Holds the Base64 string -->
+
+            <div class="file-upload-wrapper">
+                <div class="upload-content" id="upload-text">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Clique ou arraste a imagem aqui</span>
+                </div>
+                <input type="file" id="prod-img-file" accept="image/*" onchange="previewImage(this)">
+                <img id="img-preview" class="file-upload-preview" src="">
+            </div>
+
+            <select id="prod-category">
+                <option value="">Selecione a Categoria</option>
+                <!-- Filled via JS -->
+            </select>
+
+            <button onclick="saveProduct()">Salvar</button>
+        </div>
+    </div>
+
+    <div class="admin-badge" id="admin-status" onclick="logout()">
+        <i class="fa-solid fa-user-shield"></i> Admin Logado (Sair)
+    </div>
+
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Meu Carrinho</h3>
+            <span class="cart-close" onclick="toggleCart()"><i class="fa-solid fa-xmark"></i></span>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <!-- Items via JS -->
+            <p style="text-align: center; margin-top: 20px; color: #999;">Seu carrinho está vazio.</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">R$ 0,00</span>
+            </div>
+            <button class="btn-checkout" onclick="openCheckout()">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content checkout-modal-content">
+            <span class="close-modal" onclick="closeModal('checkout-modal')">&times;</span>
+            <h2>Finalizar Pedido</h2>
+
+            <div class="checkout-container">
+                <div class="checkout-summary">
+                    <h3>Resumo do Pedido</h3>
+                    <div id="checkout-items-list">
+                        <!-- Items via JS -->
+                    </div>
+                    <div class="checkout-total">
+                        <span>Total:</span>
+                        <strong id="checkout-final-price">R$ 0,00</strong>
+                    </div>
+                </div>
+
+                <div class="checkout-form">
+                    <h3>Suas Informações</h3>
+                    <div class="form-group">
+                        <label for="customer-name">Nome Completo</label>
+                        <input type="text" id="customer-name" placeholder="Como devemos te chamar?">
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-phone">WhatsApp / Telefone</label>
+                        <input type="text" id="customer-phone" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="neighbor-select">Seu Bairro (Taxa de Entrega)</label>
+                        <select id="neighbor-select" onchange="updateCheckoutTotal()">
+                            <option value="">Selecione seu bairro...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-address">Rua, Número e Referência</label>
+                        <textarea id="customer-address"
+                            placeholder="Ex: Rua das Flores, 123 - Apto 4 - Perto do mercado"></textarea>
+                    </div>
+
+                    <div class="delivery-fee-display"
+                        style="margin: 15px 0; padding: 10px; background: #fff3cd; border-radius: 8px; font-weight: bold; border: 1px solid #ffeeba;">
+                        Taxa de Entrega: <span id="checkout-delivery-fee">R$ 0,00</span>
+                    </div>
+
+                    <div class="checkout-total" style="border-top: 2px solid var(--primary-color); padding-top: 10px;">
+                        <span>Total com Entrega:</span>
+                        <strong id="checkout-final-total">R$ 0,00</strong>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment-method">Forma de Pagamento</label>
+                        <select id="payment-method" onchange="handlePaymentChange()">
+                            <option value="Pix">Pix (Rápido e Seguro)</option>
+                            <option value="Cartão de Crédito/Débito">Cartão (Entregador leva a máquina)</option>
+                            <option value="Dinheiro">Dinheiro</option>
+                        </select>
+                    </div>
+
+                    <div id="change-field-container"
+                        style="display: none; margin-bottom: 15px; padding: 15px; background: #f0f7ff; border-radius: 8px; border: 1px solid #d1e9ff;">
+                        <label for="change-for" style="font-weight: bold; display: block; margin-bottom: 5px;">Troco
+                            para quanto?</label>
+                        <input type="number" id="change-for" step="0.01" placeholder="Ex: 50.00"
+                            style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                        <small style="color: #666; display: block; margin-top: 5px; font-style: italic;">Se não precisar
+                            de troco, coloque o valor 0 ou deixe em branco.</small>
+                    </div>
+
+                    <button class="btn-confirm-checkout" onclick="confirmOrder()">
+                        <i class="fa-brands fa-whatsapp"></i> Confirmar via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="floating-cart" onclick="toggleCart()">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <div class="floating-cart-count">0</div>
+    </div>
+
+    <script src="products.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
