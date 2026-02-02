@@ -1,0 +1,518 @@
+/* ========================================
+   RESPONSIVE DESIGN - MOBILE FIRST
+   ======================================== */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .header-content {
+        gap: 15px;
+    }
+
+    .search-bar {
+        max-width: 400px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+    }
+
+    .hero-banners {
+        grid-template-columns: 1fr;
+    }
+
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile Large (481px - 767px) */
+@media (max-width: 767px) {
+
+    /* Top Bar */
+    .top-bar {
+        font-size: 0.75rem;
+        padding: 5px 0;
+    }
+
+    .top-bar .container {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+    }
+
+    .top-links {
+        display: none;
+    }
+
+    /* Header */
+    header {
+        padding: 10px 0;
+    }
+
+    .header-content {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .logo-img {
+        max-height: 50px;
+    }
+
+    .search-bar {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .search-bar input {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+
+    .header-actions {
+        gap: 15px;
+    }
+
+    .action-item span {
+        display: none;
+    }
+
+    .action-item i {
+        font-size: 1.3rem;
+    }
+
+    /* Navigation */
+    .main-nav {
+        padding: 10px 0;
+    }
+
+    .all-categories {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+    }
+
+    .nav-links {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .nav-links li a {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 20px 0;
+    }
+
+    .hero-banners {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .main-banner {
+        min-height: 250px;
+        padding: 20px;
+    }
+
+    .banner-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .banner-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .banner-content p {
+        font-size: 0.9rem;
+    }
+
+    /* Features */
+    .features-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .feature-item {
+        padding: 15px;
+    }
+
+    .feature-item i {
+        font-size: 1.8rem;
+    }
+
+    .feature-item h4 {
+        font-size: 1rem;
+    }
+
+    /* Products Grid */
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .product-card {
+        padding: 10px;
+    }
+
+    .product-card img {
+        height: 150px;
+    }
+
+    .product-name {
+        font-size: 0.9rem;
+    }
+
+    .price-new {
+        font-size: 1.1rem;
+    }
+
+    .price-old {
+        font-size: 0.85rem;
+    }
+
+    .btn-add-cart {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .btn-add-cart span {
+        display: none;
+    }
+
+    /* Section Headers */
+    .section-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .view-all {
+        font-size: 0.85rem;
+    }
+
+    /* Newsletter */
+    .newsletter-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .newsletter-content i {
+        font-size: 2rem;
+    }
+
+    .newsletter-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .newsletter-content form {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .newsletter-content input {
+        width: 100%;
+    }
+
+    .newsletter-content button {
+        width: 100%;
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .footer-col h3 {
+        font-size: 1.1rem;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .cart-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .cart-item {
+        gap: 10px;
+    }
+
+    .cart-item img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .cart-item-name {
+        font-size: 0.9rem;
+    }
+
+    .cart-item-price {
+        font-size: 0.85rem;
+    }
+
+    .quantity-controls button {
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+
+    .quantity-controls span {
+        font-size: 0.9rem;
+    }
+
+    /* Checkout Modal */
+    .checkout-modal .modal-content {
+        width: 95%;
+        max-width: 95%;
+        padding: 15px;
+        margin: 10px;
+    }
+
+    .checkout-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .checkout-summary h3,
+    .checkout-form h3 {
+        font-size: 1.1rem;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        font-size: 0.95rem;
+        padding: 10px;
+    }
+
+    .btn-confirm-checkout {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    /* Floating Cart */
+    .floating-cart {
+        width: 55px;
+        height: 55px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .floating-cart i {
+        font-size: 1.3rem;
+    }
+
+    .floating-cart-count {
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+    }
+
+    /* Category Groups */
+    .category-group {
+        padding: 15px;
+    }
+
+    .category-header h3 {
+        font-size: 1.1rem;
+    }
+
+    .category-products {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile Small (320px - 480px) */
+@media (max-width: 480px) {
+
+    /* Container */
+    .container {
+        padding: 0 10px;
+    }
+
+    /* Header */
+    .logo-img {
+        max-height: 40px;
+    }
+
+    .search-bar input {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+    }
+
+    .search-bar button {
+        padding: 8px 12px;
+    }
+
+    .cart-count {
+        width: 18px;
+        height: 18px;
+        font-size: 0.65rem;
+    }
+
+    /* Navigation */
+    .nav-links {
+        justify-content: center;
+    }
+
+    .nav-links li a {
+        font-size: 0.75rem;
+        padding: 5px 8px;
+    }
+
+    /* Hero */
+    .main-banner {
+        min-height: 200px;
+        padding: 15px;
+    }
+
+    .banner-content h2 {
+        font-size: 1.4rem;
+    }
+
+    .banner-content h3 {
+        font-size: 1rem;
+    }
+
+    .banner-content p {
+        font-size: 0.85rem;
+    }
+
+    .btn-primary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* Products */
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .product-card {
+        max-width: 100%;
+    }
+
+    .product-card img {
+        height: 200px;
+    }
+
+    .product-name {
+        font-size: 1rem;
+    }
+
+    .price-new {
+        font-size: 1.3rem;
+    }
+
+    .btn-add-cart {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Section Headers */
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .section-header h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Marquee */
+    .marquee-content {
+        font-size: 0.9rem;
+    }
+
+    /* Modal */
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.3rem;
+    }
+
+    /* Checkout */
+    .checkout-total {
+        font-size: 1.1rem;
+    }
+
+    .btn-confirm-checkout {
+        font-size: 0.95rem;
+        padding: 12px;
+    }
+
+    /* Footer */
+    .footer-bottom {
+        font-size: 0.8rem;
+        padding: 15px 0;
+    }
+}
+
+/* Landscape Mobile Fix */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        padding: 15px 0;
+    }
+
+    .main-banner {
+        min-height: 150px;
+    }
+
+    .modal-content {
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+    .container {
+        max-width: 1400px;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .hero-banners {
+        gap: 30px;
+    }
+}
+
+/* Print Styles */
+@media print {
+
+    .top-bar,
+    header,
+    .main-nav,
+    .floating-cart,
+    .cart-sidebar,
+    .newsletter,
+    footer {
+        display: none;
+    }
+
+    .products-section {
+        page-break-inside: avoid;
+    }
+}

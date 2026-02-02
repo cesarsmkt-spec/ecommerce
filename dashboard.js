@@ -64,6 +64,19 @@ function switchTab(tabName) {
     } else if (tabName === 'orders') {
         renderOrdersTable();
     }
+
+    // Close mobile menu after selection
+    if (window.innerWidth <= 767) {
+        toggleMobileMenu();
+    }
+}
+
+function toggleMobileMenu() {
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.querySelector('.mobile-overlay');
+
+    sidebar.classList.toggle('mobile-open');
+    overlay.classList.toggle('active');
 }
 
 function renderInventoryTable() {
